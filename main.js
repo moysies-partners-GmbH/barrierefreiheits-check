@@ -6,6 +6,6 @@ errors.push({
 });
 
 errors.forEach((e) => {
-  console.log(e.message);
+  console.log(e.title, ":", e.message);
   console.log("----");
 });
