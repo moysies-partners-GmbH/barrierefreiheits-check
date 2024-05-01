@@ -52,6 +52,19 @@
     })()
   );
 
+  tests.push(
+    (() => {
+      const selector = `table:not([aria-label])`;
+      return {
+        title: `tables should have aria lable`,
+        message: `found ${document.querySelectorAll(selector).length}`,
+        state: document.querySelectorAll(selector).length === 0,
+        elements: document.querySelectorAll(selector),
+        selector,
+      };
+    })()
+  );
+
   tests.forEach((e) => {
     console.log(
       "%c" + e.title,
