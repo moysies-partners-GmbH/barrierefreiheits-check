@@ -65,6 +65,19 @@
     })()
   );
 
+  tests.push(
+    (() => {
+      const selector = `td[tabindex]`;
+      return {
+        title: `table cells should not have tabindex`,
+        message: `found ${document.querySelectorAll(selector).length}`,
+        state: document.querySelectorAll(selector).length === 0,
+        elements: document.querySelectorAll(selector),
+        selector,
+      };
+    })()
+  );
+
   tests.forEach((e) => {
     console.log(
       "%c" + e.title,
