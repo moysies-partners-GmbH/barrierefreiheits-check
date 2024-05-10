@@ -1,13 +1,15 @@
 (function () {
   const tests = [
     {
+    
       run: () => {
         const selector = "h1";
+        const elements =document.querySelectorAll(selector)
         return {
           title: "should have exactly 1 <h1>",
-          message: `found ${document.querySelectorAll(selector).length}`,
-          state: document.querySelectorAll(selector).length === 1,
-          elements: document.querySelectorAll(selector),
+          message: `found ${elements.length}`,
+          state: elements.length === 1,
+          elements,
           selector,
         };
       },
