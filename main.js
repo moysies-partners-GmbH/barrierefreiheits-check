@@ -76,20 +76,14 @@
   ];
 
   tests.forEach((test) => {
-    const testResult = test.run();
+    const { message, elements, selector, title, state } = test.run();
     console.log(
-      "%c" + testResult.title,
-      `color: ${
-        testResult.state
-          ? "#2eff2e"
-          : testResult.state === false
-          ? "#fe1a1a"
-          : "#fec81a"
-      }`,
+      "%c" + title,
+      `color: ${state ? "#2eff2e" : state === false ? "#fe1a1a" : "#fec81a"}`,
       {
-        message: testResult.message,
-        elements: testResult.elements,
-        selector: testResult.selector,
+        message,
+        elements,
+        selector,
       }
     );
   });
