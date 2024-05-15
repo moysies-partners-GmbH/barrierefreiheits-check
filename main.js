@@ -112,13 +112,9 @@
 
 
   const confetti = () => {
-    window.makeItRain = () => {
-      poof();
-
-    }
     const script = document.body.appendChild(document.createElement('script'))
     script.src = 'http://konradullrich.github.io/confetti.js'
-    script.setAttribute('onLoad', 'window.makeItRain()')
+    script.setAttribute('onLoad', ' poof()')
   }
   if (errorCount === 0) {
     confetti()
