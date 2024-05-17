@@ -86,10 +86,11 @@
         };
       },
     },
+
     {
       run: () => {
-        const selector = { labels: `label[for]` };
-        const labelElements = document.querySelectorAll(selector.labels)
+        const selector = `label[for]`;
+        const labelElements = document.querySelectorAll(selector)
         const failingElements = []
         labelElements.forEach((label) => {
           const associatedElements = document.querySelectorAll(`#${label.getAttribute('for')}`)
@@ -106,12 +107,13 @@
         };
       },
     },
+
   ];
 
   let errorCount = 0
 
   tests.forEach((test) => {
-    const { message, elements, selector, title, state } = test.run();
+    const { message, elements, selector, title, state, links } = test.run();
 
     if (!state) errorCount++
     console.log(
@@ -121,6 +123,8 @@
         message,
         elements,
         selector,
+        links,
+
       }
     );
   });
