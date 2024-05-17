@@ -108,6 +108,27 @@
       },
     },
 
+    {
+      run: () => {
+        const selector = `[*|aria-labelledby]`;
+        const labelByElements = document.querySelectorAll(selector)
+        const failingElements = []
+        labelByElements.forEach(element => {
+          const associatedElements = document.querySelectorAll(`#${element.getAttribute('aria-labelledby')}`)
+          if (associatedElements.length !== 1) {
+            failingElements.push(element)
+          }
+        })
+        return {
+          title: `Ensure the label-by attribute has a corresponding ID.`,
+          message: `found ${failingElements.length} failing labels`,
+          state: failingElements.length === 0,
+          elements: failingElements,
+          selector,
+        };
+      },
+    },
+
   ];
 
   let errorCount = 0
