@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <a href="errors.html">ERRORS</a>
 
-    <a
-      href="javascript:(function()%7Bdocument.body.appendChild(document.createElement('script')).src%3D'https%3A%2F%2Fkonradullrich.github.io%2Fmain.js'%7D)()%3B"
-      >bookmarklet</a>
-    <h1>Bla</h1>
-    <input readonly />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <title>Document</title>
+</head>
 
-    <table aria-label="test">
-      <tr>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Country</th>
-      </tr>
-      <tr>
-        <td>Alfreds Futterkiste Zwei</td>
-        <td>Maria Anders fancy</td>
-        <td>Germany</td>
-      </tr>
-      <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-      </tr>
-    </table>
-    <input type="button">
-  </body>
+<body>
+  <a href="errors.html">ERRORS</a>
 
-  <script src="main.js"></script>
+  <a
+    href="javascript:(function()%7Bdocument.body.appendChild(document.createElement('script')).src%3D'https%3A%2F%2Fkonradullrich.github.io%2Fmain.js'%7D)()%3B">bookmarklet</a>
+  <h1>NO ERRORS</h1>
+  <input readonly />
+
+  <table aria-label="test">
+    <tr>
+      <th>Company</th>
+      <th>Contact</th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <td>Alfreds Futterkiste Zwei</td>
+      <td>Maria Anders fancy</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <td>Centro comercial Moctezuma</td>
+      <td>Francisco Chang</td>
+      <td>Mexico</td>
+    </tr>
+  </table>
+  <input type="button">
+
+  <div>
+    <input id="test" type="text">
+    <label for="test"></label>
+
+  </div>
+</body>
+
+<script src="main.js"></script>
+
 </html>

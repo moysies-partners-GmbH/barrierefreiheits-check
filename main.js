@@ -86,7 +86,26 @@
         };
       },
     },
-
+    {
+      run: () => {
+        const selector = { labels: `label[for]` };
+        const labelElements = document.querySelectorAll(selector.labels)
+        const failingElements = []
+        labelElements.forEach((label) => {
+          const associatedElements = document.querySelectorAll(`#${label.getAttribute('for')}`)
+          if (associatedElements.length !== 1) {
+            failingElements.push(label)
+          }
+        })
+        return {
+          title: `labels 'for' attribue should have an associated element`,
+          message: `found ${failingElements.length} failing labels`,
+          state: failingElements.length === 0,
+          elements: failingElements,
+          selector,
+        };
+      },
+    },
   ];
 
   let errorCount = 0
@@ -119,9 +138,5 @@
   if (errorCount === 0) {
     confetti()
   }
-
 })();
 
-
-
-// javascript:(function()%7Bdocument.body.appendChild(document.createElement('script')).src%3D'https%3A%2F%2Fkonradullrich.github.io%2Fmain.js'%7D)()%3B
