@@ -54,7 +54,7 @@
       run: () => {
         const selector = `table:not([aria-label])`;
         return {
-          title: `tables should have aria lable`,
+          title: `tables should have aria label`,
           message: `found ${document.querySelectorAll(selector).length}`,
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
