@@ -129,6 +129,20 @@
       },
     },
 
+    {
+      run: () => {
+        const selector = 'img:not([alt]):not([role="presentation"])';
+        return {
+          title: `Images should have an alt attribute or role presentation `,
+          message: `found ${document.querySelectorAll(selector).length}`,
+          state: document.querySelectorAll(selector).length === 0,
+          elements: document.querySelectorAll(selector),
+          selector,
+        };
+      },
+    },
+    
+
   ];
 
   let errorCount = 0
