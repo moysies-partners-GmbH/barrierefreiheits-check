@@ -30,7 +30,7 @@
       run: () => {
         const selector = "a[role='link']";
         return {
-          title: `should have <a> with role="link" `,
+          title: `should not have <a> with role="link" `,
           message: `found ${document.querySelectorAll(selector).length}`,
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
