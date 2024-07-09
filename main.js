@@ -30,7 +30,7 @@
       run: () => {
         const selector = "a[role='link']";
         return {
-          title: `should not have <a> with role="link" `,
+          title: `elements with type='button' should not have role='button' because it redundant" `,
           message: `found ${document.querySelectorAll(selector).length}`,
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
@@ -141,7 +141,7 @@
         };
       },
     },
-    
+
 
   ];
 

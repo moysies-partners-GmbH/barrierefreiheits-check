@@ -30,6 +30,15 @@ var customAccessible = false;
     $('[aria-labelledby="Header_Container_AppMain"]').removeAttr(
       "aria-labelledby"
     );
+
+    //ID doesnt exist. If the ID specified in the aria-activedescendant attribute does not exist, the attribute is set to the ID of the second child element.
+    $("[aria-activedescendant]").each(function (elm) {
+      var elmId = $(this).attr("aria-activedescendant");
+      if (!$("#" + elmId).length) {
+        $(this).attr("aria-activedescendant", $(this).children()[1].id);
+      }
+    });
+
     //role on link and button redundant
     $("a[role='link']").removeAttr("role");
     $("[type='button'][role='button']").removeAttr("role");
@@ -66,13 +75,7 @@ var customAccessible = false;
       .removeAttr("aria-label");
 
 
-    //ID doesnt exist. If the ID specified in the aria-activedescendant attribute does not exist, the attribute is set to the ID of the second child element.
-    $("[aria-activedescendant]").each(function (elm) {
-      var elmId = $(this).attr("aria-activedescendant");
-      if (!$("#" + elmId).length) {
-        $(this).attr("aria-activedescendant", $(this).children()[1].id);
-      }
-    });
+
 
 
     /**
