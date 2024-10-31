@@ -142,6 +142,28 @@
       },
     },
 
+    {
+      run: () => {
+          const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"]';
+          var faultyElements = new Array();
+
+          document.querySelectorAll(selector).forEach((inputElement) => {
+            if(document.querySelector('label[for="' + inputElement.id + '"]') == undefined)
+            {
+              faultyElements.push(inputElement);
+            }
+          });
+
+          return {
+            title: `Input elements should have a label element `,
+            message: `found ${faultyElements.length}`,
+            state: faultyElements.length === 0,
+            elements: faultyElements,
+            selector,
+          };
+      }
+    },
+
 
   ];
 
