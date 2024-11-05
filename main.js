@@ -144,7 +144,7 @@
 
     {
       run: () => {
-          const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"]';
+          const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
           var faultyElements = new Array();
 
           document.querySelectorAll(selector).forEach((inputElement) => {
