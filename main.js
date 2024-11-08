@@ -144,7 +144,7 @@
 
     {
       run: () => {
-          const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"]';
+          const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
           var faultyElements = new Array();
 
           document.querySelectorAll(selector).forEach((inputElement) => {
@@ -161,6 +161,42 @@
             elements: faultyElements,
             selector,
           };
+      }
+    },
+
+    {
+      // Checks for 9.1.3.1d Inhalt gegliedert @see https://bitvtest.de/pruefschritt/bitv-20-web/bitv-20-web-9-1-3-1d-inhalt-gegliedert
+      run: () => {
+        var regexp = /(\s*<br>){2,}/gm;
+        var regexpResult = [...document.body.innerHTML.matchAll(regexp)];
+        var returnObject = {
+          title: `No multiple <br> tags in a row detected.`,
+          message: `found ${regexpResult.length}`,
+          state: regexpResult.length === 0,
+          elements: regexpResult,
+          selector: regexp,
+        };
+
+        if(regexpResult.length > 0)
+        {
+          returnObject.title = `Multiple <br> tags in a row detected. Consider using paragraphs or other structural html tags.`;
+        }
+        
+        return returnObject;
+      }
+    },
+
+    {
+      // Additional check for 9.1.3.1d Inhalt gegliedert @see https://bitvtest.de/pruefschritt/bitv-20-web/bitv-20-web-9-1-3-1d-inhalt-gegliedert
+      run: () => {
+        const selector = 'b,i';
+        return {
+          title: `Don't use <b> or <i> to format your content. Either use more expressive tags like <strong>, <em> and the like or CSS.`,
+          message: `found ${document.querySelectorAll(selector).length}`,
+          state: document.querySelectorAll(selector).length === 0,
+          elements: document.querySelectorAll(selector),
+          selector,
+        };
       }
     },
 
