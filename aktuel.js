@@ -2,6 +2,7 @@
 var customAccessible = false;
 
 
+
 (function ($) {
   function debounce(func, delay) {
     let timerId;
