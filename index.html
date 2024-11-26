@@ -20,10 +20,13 @@
 
   <script>
     const id = "mp_accessibility";
-    const currentUrl = window.location.origin;
-    console.log(currentUrl);
+    let currentUrl = window.location.origin;
 
-    const url = currentUrl + "/main.js";
+    const online =
+      "https://moysies-partners-gmbh.github.io/barrierefreiheits-check/main.js";
+
+    const url = online;
+
     // const url = "/main.js";
     const code = `
      const scriptElement = document.querySelector('#${id}');
