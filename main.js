@@ -1,15 +1,129 @@
+class TestManager {
+  class = "testResult";
+  results = [];
+  tests = [];
+  errorCount = 0;
+
+  constructor(tests) {
+    this.tests = tests;
+    if (this.isShowing()) {
+      this.eraseTest();
+      return;
+    }
+    this.run();
+    this.logResult();
+    this.showResult();
+    if (this.errorCount === 0) {
+      this.confetti();
+    }
+  }
+
+  isShowing() {
+    return !!document.querySelector("." + this.class);
+  }
+
+  eraseTest() {
+    const elements = document.querySelectorAll("." + this.class);
+    elements.forEach((e) => e.remove());
+    console.clear();
+  }
+
+  run() {
+    this.errorCount = 0;
+    this.results = [];
+    this.tests.forEach((test) => {
+      const result = test.run();
+      this.results.push(result);
+      if (!result.state) this.errorCount++;
+    });
+  }
+
+  getColorForState(state) {
+    return state ? "#2eff2e" : state === false ? "#fe1a1a" : "#fec81a";
+  }
+
+  logResult() {
+    this.results.forEach((result) => {
+      const { message, elements, selector, title, state, links } = result;
+      console.log("%c" + title, `color: ${this.getColorForState(state)}`, {
+        message,
+        elements,
+        selector,
+        links,
+      });
+    });
+  }
+
+  confetti() {
+    const script = document.body.appendChild(document.createElement("script"));
+    script.src =
+      "https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js";
+    script.setAttribute(
+      "onLoad",
+      `confetti({
+        particleCount: 1000,
+        spread: 370,
+        origin: { y: 0.2 },
+      });
+      `
+    );
+  }
+
+  getResultElement(result) {
+    const { message, elements, selector, title, state, links } = result;
+    const element = document.createElement("div");
+
+    element.style.padding = "6px";
+    element.style.borderRadius = "8px";
+    element.style.marginBottom = "3px";
+    element.style.backgroundColor = this.getColorForState(state);
+    const titleElement = document.createElement("div");
+    titleElement.innerText = title;
+    element.appendChild(titleElement);
+
+    if (links) {
+      links.forEach((link) => {
+        const linkElement = document.createElement("a");
+        linkElement.innerText = link.label;
+        linkElement.href = link.url;
+        linkElement.setAttribute("target", "_blank");
+        element.appendChild(linkElement);
+      });
+    }
+    return element;
+  }
+
+  showResult() {
+    const wraper = document.createElement("div");
+    wraper.classList.add(this.class);
+    wraper.style.position = "absolute";
+    wraper.style.fontFamily = "Arial";
+    wraper.style.width = "300px";
+    wraper.style.overflowY = "auto";
+    wraper.style.top = "10px";
+    wraper.style.bottom = "10px";
+    wraper.style.right = "10px";
+    wraper.style.backgroundColor = "white";
+    this.results.forEach((result) => {
+      wraper.appendChild(this.getResultElement(result));
+    });
+    document.body.appendChild(wraper);
+  }
+}
+
 (function () {
   const tests = [
     {
       run: () => {
         const selector = "h1";
-        const elements = document.querySelectorAll(selector)
+        const elements = document.querySelectorAll(selector);
         return {
           title: "should have exactly 1 <h1>",
           message: `found ${elements.length}`,
           state: elements.length === 1,
           elements,
           selector,
+          links: [{ label: "booom", url: "https://www.ddd.dk/" }],
         };
       },
     },
@@ -90,14 +204,16 @@
     {
       run: () => {
         const selector = `label[for]`;
-        const labelElements = document.querySelectorAll(selector)
-        const failingElements = []
+        const labelElements = document.querySelectorAll(selector);
+        const failingElements = [];
         labelElements.forEach((label) => {
-          const associatedElements = document.querySelectorAll(`#${label.getAttribute('for')}`)
+          const associatedElements = document.querySelectorAll(
+            `#${label.getAttribute("for")}`
+          );
           if (associatedElements.length !== 1) {
-            failingElements.push(label)
+            failingElements.push(label);
           }
-        })
+        });
         return {
           title: `labels 'for' attribue should have an associated element`,
           message: `found ${failingElements.length} failing labels`,
@@ -111,14 +227,16 @@
     {
       run: () => {
         const selector = `[*|aria-labelledby]`;
-        const labelByElements = document.querySelectorAll(selector)
-        const failingElements = []
-        labelByElements.forEach(element => {
-          const associatedElements = document.querySelectorAll(`#${element.getAttribute('aria-labelledby')}`)
+        const labelByElements = document.querySelectorAll(selector);
+        const failingElements = [];
+        labelByElements.forEach((element) => {
+          const associatedElements = document.querySelectorAll(
+            `#${element.getAttribute("aria-labelledby")}`
+          );
           if (associatedElements.length !== 1) {
-            failingElements.push(element)
+            failingElements.push(element);
           }
-        })
+        });
         return {
           title: `Ensure the label-by attribute has a corresponding ID.`,
           message: `found ${failingElements.length} failing labels`,
@@ -144,24 +262,27 @@
 
     {
       run: () => {
-          const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
-          var faultyElements = new Array();
+        const selector =
+          'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
+        var faultyElements = new Array();
 
-          document.querySelectorAll(selector).forEach((inputElement) => {
-            if(document.querySelector('label[for="' + inputElement.id + '"]') == undefined)
-            {
-              faultyElements.push(inputElement);
-            }
-          });
+        document.querySelectorAll(selector).forEach((inputElement) => {
+          if (
+            document.querySelector('label[for="' + inputElement.id + '"]') ==
+            undefined
+          ) {
+            faultyElements.push(inputElement);
+          }
+        });
 
-          return {
-            title: `Input elements should have a label element `,
-            message: `found ${faultyElements.length}`,
-            state: faultyElements.length === 0,
-            elements: faultyElements,
-            selector,
-          };
-      }
+        return {
+          title: `Input elements should have a label element `,
+          message: `found ${faultyElements.length}`,
+          state: faultyElements.length === 0,
+          elements: faultyElements,
+          selector,
+        };
+      },
     },
 
     {
@@ -177,19 +298,18 @@
           selector: regexp,
         };
 
-        if(regexpResult.length > 0)
-        {
+        if (regexpResult.length > 0) {
           returnObject.title = `Multiple <br> tags in a row detected. Consider using paragraphs or other structural html tags.`;
         }
-        
+
         return returnObject;
-      }
+      },
     },
 
     {
       // Additional check for 9.1.3.1d Inhalt gegliedert @see https://bitvtest.de/pruefschritt/bitv-20-web/bitv-20-web-9-1-3-1d-inhalt-gegliedert
       run: () => {
-        const selector = 'b,i';
+        const selector = "b,i";
         return {
           title: `Don't use <b> or <i> to format your content. Either use more expressive tags like <strong>, <em> and the like or CSS.`,
           message: `found ${document.querySelectorAll(selector).length}`,
@@ -197,43 +317,33 @@
           elements: document.querySelectorAll(selector),
           selector,
         };
-      }
+      },
     },
 
-
+    {
+      run: () => {
+        const selector = `[aria-activedescendant]`;
+        const activedescendantElements = document.querySelectorAll(selector);
+        const failingElements = [];
+        activedescendantElements.forEach((element) => {
+          const associatedElements = document.querySelectorAll(
+            `#${element.getAttribute("aria-activedescendant")}`
+          );
+          if (associatedElements.length !== 1) {
+            failingElements.push(element);
+          }
+        });
+        return {
+          title: `Ensure the aria-activedescendant attribute has a corresponding ID.`,
+          message: `found ${failingElements.length} failing labels`,
+          state: failingElements.length === 0,
+          elements: failingElements,
+          selector,
+        };
+      },
+    },
   ];
-
-  let errorCount = 0
-
-  tests.forEach((test) => {
-    const { message, elements, selector, title, state, links } = test.run();
-
-    if (!state) errorCount++
-    console.log(
-      "%c" + title,
-      `color: ${state ? "#2eff2e" : state === false ? "#fe1a1a" : "#fec81a"}`,
-      {
-        message,
-        elements,
-        selector,
-        links,
-
-      }
-    );
-  });
-
-
-
-
-
-
-  const confetti = () => {
-    const script = document.body.appendChild(document.createElement('script'))
-    script.src = 'http://konradullrich.github.io/confetti.js'
-    script.setAttribute('onLoad', ' poof()')
-  }
-  if (errorCount === 0) {
-    confetti()
-  }
+  window.runMpAccessibility = () => {
+    window.testManager = new TestManager(tests);
+  };
 })();
-
