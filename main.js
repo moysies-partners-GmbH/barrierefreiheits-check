@@ -296,6 +296,12 @@ class TestManager {
           state: regexpResult.length === 0,
           elements: regexpResult,
           selector: regexp,
+          links: [
+            {
+              label: "bitvtest",
+              url: "https://bitvtest.de/pruefschritt/bitv-20-web/bitv-20-web-9-1-3-1d-inhalt-gegliedert",
+            },
+          ],
         };
 
         if (regexpResult.length > 0) {
@@ -316,6 +322,12 @@ class TestManager {
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
+          links: [
+            {
+              label: "bitvtest",
+              url: "https://bitvtest.de/pruefschritt/bitv-20-web/bitv-20-web-9-1-3-1d-inhalt-gegliedert",
+            },
+          ],
         };
       },
     },
