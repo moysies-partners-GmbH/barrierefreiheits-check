@@ -124,7 +124,7 @@ class TestManager {
           state: elements.length === 1,
           elements,
           selector,
-          links: [{ label: "booom", url: "https://www.ddd.dk/" }],
+          links: [{ label: "booom", url: "https://www.ddd.dk/" },{ label: "bam", url: "https://www.ddd.dk/" }],
         };
       },
     },
