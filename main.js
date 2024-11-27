@@ -103,6 +103,7 @@ class TestManager {
     wraper.style.top = "10px";
     wraper.style.bottom = "10px";
     wraper.style.right = "10px";
+    wraper.style.zIndex = "999999999999";
     wraper.style.backgroundColor = "white";
     this.results.forEach((result) => {
       wraper.appendChild(this.getResultElement(result));
