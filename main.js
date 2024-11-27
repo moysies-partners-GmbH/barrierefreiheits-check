@@ -248,7 +248,7 @@ class TestManager {
           state: failingElements.length === 0,
           elements: failingElements,
           selector,
-          links: [{ label: "", url: "" }],
+          links: [{ label: "Loop: Label Elemente ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=Ipmrey&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjRlNmY1YWY2LTQ3MGYtNDZkYS1hZDRjLWZmNDQ5M2NkZDUzNCUyMiU3RA%3D%3D" }],
         };
       },
     },
