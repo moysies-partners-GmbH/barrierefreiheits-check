@@ -39,7 +39,7 @@ class TestManager {
   }
 
   getColorForState(state) {
-    return state ? "#2eff2e" : state === false ? "#fe1a1a" : "#fec81a";
+    return state ? "#2eff2e" : state === false ? "#f04f4f" : "#44f272";
   }
 
   logResult() {
@@ -82,12 +82,20 @@ class TestManager {
     element.appendChild(titleElement);
 
     if (links) {
+      const linkListElement = document.createElement("ul");
+      linkListElement.style.margin = "5px";
+      linkListElement.style.paddingLeft = "15px";
       links.forEach((link) => {
+        const linkListItemElement = document.createElement("li");
         const linkElement = document.createElement("a");
         linkElement.innerText = link.label;
         linkElement.href = link.url;
+        linkElement.style.color = "#13004b";
+        linkElement.style.textDecoration = "underline";
         linkElement.setAttribute("target", "_blank");
-        element.appendChild(linkElement);
+        linkListItemElement.appendChild(linkElement);
+        linkListElement.appendChild(linkListItemElement);
+        element.appendChild(linkListElement);
       });
     }
     return element;
@@ -96,7 +104,7 @@ class TestManager {
   showResult() {
     const wraper = document.createElement("div");
     wraper.classList.add(this.class);
-    wraper.style.position = "absolute";
+    wraper.style.position = "fixed";
     wraper.style.fontFamily = "Arial";
     wraper.style.width = "300px";
     wraper.style.overflowY = "auto";
@@ -104,7 +112,8 @@ class TestManager {
     wraper.style.bottom = "10px";
     wraper.style.right = "10px";
     wraper.style.zIndex = "999999999999";
-    wraper.style.backgroundColor = "white";
+    wraper.style.borderRadius = "8px";
+    wraper.style.color = "black";
     this.results.forEach((result) => {
       wraper.appendChild(this.getResultElement(result));
     });
@@ -143,7 +152,12 @@ class TestManager {
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
-          links: [{ label: "Loop: Best Practices für semantische Überschriften ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EagVWICRgepNsiZNjYTRxokBi_lYJSVlkWCp6KNz1FaE4w?e=oEJSTM&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TklDVk1JQkVNQjVKRzNFSlNOUldDTkRSVUomYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjEzNzk4MGE2LTQwOTUtNGQ5OS1iYzYzLTAyZGFhYmY2ODEzYSUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: Best Practices für semantische Überschriften ",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EagVWICRgepNsiZNjYTRxokBi_lYJSVlkWCp6KNz1FaE4w?e=oEJSTM&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TklDVk1JQkVNQjVKRzNFSlNOUldDTkRSVUomYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjEzNzk4MGE2LTQwOTUtNGQ5OS1iYzYzLTAyZGFhYmY2ODEzYSUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
@@ -165,7 +179,7 @@ class TestManager {
         };
       },
     },
-  {
+    {
       run: () => {
         const selector = `[type='button'][role='button']`;
         return {
@@ -192,7 +206,7 @@ class TestManager {
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
-           links: [
+          links: [
             {
               label: "Loop: Redundante role-Attribute ",
               url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EZvFaOBxG_5Jp9VqLJeh5bsBa3gq-MUtW7eHWE1a6Mr73w?e=fpFBif&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TTNZVlVPQTRJMzdaRTJQVkxLRlNMMkRaTjMmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjEzNzk4MGE2LTQwOTUtNGQ5OS1iYzYzLTAyZGFhYmY2ODE0OSUyMiU3RA%3D%3D",
@@ -210,7 +224,12 @@ class TestManager {
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
-          links: [{ label: "Loop: Label Elemente ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=gzZZt9&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjRlNmY1YWY2LTQ3MGYtNDZkYS1hZDRjLWZmNDQ5M2NkZDUzNCUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: Label Elemente ",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=gzZZt9&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjRlNmY1YWY2LTQ3MGYtNDZkYS1hZDRjLWZmNDQ5M2NkZDUzNCUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
@@ -223,11 +242,15 @@ class TestManager {
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
-          links: [{ label: "Loop: Tastaturzugänglichkeit ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/ESueQBnMX09CrW9Fh9MGJBABgLy5LE_pkht3RI0fepd4jA?e=2vg28C&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3SkxUWkFCVFRDN0o1QksyMzJGUTdKUU1KQVEmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjU5ODRlMmM1LTc2NjQtNGU5NC1iZmYwLWQ3MDk1NmUyMjQwYyUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: Tastaturzugänglichkeit ",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/ESueQBnMX09CrW9Fh9MGJBABgLy5LE_pkht3RI0fepd4jA?e=2vg28C&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3SkxUWkFCVFRDN0o1QksyMzJGUTdKUU1KQVEmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjU5ODRlMmM1LTc2NjQtNGU5NC1iZmYwLWQ3MDk1NmUyMjQwYyUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
-   
 
     {
       run: () => {
@@ -248,7 +271,12 @@ class TestManager {
           state: failingElements.length === 0,
           elements: failingElements,
           selector,
-          links: [{ label: "Loop: Label Elemente ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=Ipmrey&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjRlNmY1YWY2LTQ3MGYtNDZkYS1hZDRjLWZmNDQ5M2NkZDUzNCUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: Label Elemente ",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=Ipmrey&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjRlNmY1YWY2LTQ3MGYtNDZkYS1hZDRjLWZmNDQ5M2NkZDUzNCUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
@@ -272,7 +300,12 @@ class TestManager {
           state: failingElements.length === 0,
           elements: failingElements,
           selector,
-          links: [{ label: "Loop: aria-labelledby", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EW57UOVLiPlAvJZKB-JGS7QB12w7peolXlcPijvGFCtLZA?e=P8oXhi&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TE9QTklPS1M0STdGQUxaRlNLQTdSRU1TNVUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjQwZGY4ODYxLWJjNjAtNGZiMC1iMTY4LTc3NjBhMjM2OWRlNyUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: aria-labelledby",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EW57UOVLiPlAvJZKB-JGS7QB12w7peolXlcPijvGFCtLZA?e=P8oXhi&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TE9QTklPS1M0STdGQUxaRlNLQTdSRU1TNVUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjQwZGY4ODYxLWJjNjAtNGZiMC1iMTY4LTc3NjBhMjM2OWRlNyUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
@@ -286,7 +319,12 @@ class TestManager {
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
-          links: [{ label: "Loop: Bild- und Multimedia-Zugänglichkeit ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EbZdMZfoYEBHmd0ZYDh4LvIBLF_3Dv_FHYsBkBNnyhTq9g?e=KPmhgz&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TldMVVlaUDJEQUlCRFpUWElaTUE0SFFMWFMmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjU5ODRlMmM1LTc2NjQtNGU5NC1iZmYwLWQ3MDk1NmUyMjNmZiUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: Bild- und Multimedia-Zugänglichkeit ",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EbZdMZfoYEBHmd0ZYDh4LvIBLF_3Dv_FHYsBkBNnyhTq9g?e=KPmhgz&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TldMVVlaUDJEQUlCRFpUWElaTUE0SFFMWFMmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMjU5ODRlMmM1LTc2NjQtNGU5NC1iZmYwLWQ3MDk1NmUyMjNmZiUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
@@ -312,7 +350,12 @@ class TestManager {
           state: faultyElements.length === 0,
           elements: faultyElements,
           selector,
-          links: [{ label: "Loop: Label Elemente", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=6ikCpY&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJng9JTdCJTIydyUyMiUzQSUyMlQwUlRVSHh0YjNsemFXVnpMbk5vWVhKbGNHOXBiblF1WTI5dGZHSWhiWGxQWmpOMUxVdGZNRFphYVU0NGFHeFRNRUUxYjAxRVduazBkbFZxUWtwcFZHaGFaRGhpTTFkdFUxQkpVRmxGYURoamFsRlphM0l0V2t4bFdVeFphSHd3TVVGS05sSlhOMGxMUkVGTlVWRlVVMDlTVmtOSlZ6SlhORlZQUjBOVE1qWkMlMjIlMkMlMjJpJTIyJTNBJTIyNGU2ZjVhZjYtNDcwZi00NmRhLWFkNGMtZmY0NDkzY2RkNTM0JTIyJTdE" }],
+          links: [
+            {
+              label: "Loop: Label Elemente",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EXY-0S7IwJBFqoyHOyu_WlcBu9Nl0-mGjiriQRkaxUWXrw?e=6ikCpY&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TFdIM0lTNVNHQVNCQzJWREVISE1WMzZXU1gmYz0lMkYmYT1Mb29wQXBwJng9JTdCJTIydyUyMiUzQSUyMlQwUlRVSHh0YjNsemFXVnpMbk5vWVhKbGNHOXBiblF1WTI5dGZHSWhiWGxQWmpOMUxVdGZNRFphYVU0NGFHeFRNRUUxYjAxRVduazBkbFZxUWtwcFZHaGFaRGhpTTFkdFUxQkpVRmxGYURoamFsRlphM0l0V2t4bFdVeFphSHd3TVVGS05sSlhOMGxMUkVGTlVWRlVVMDlTVmtOSlZ6SlhORlZQUjBOVE1qWkMlMjIlMkMlMjJpJTIyJTNBJTIyNGU2ZjVhZjYtNDcwZi00NmRhLWFkNGMtZmY0NDkzY2RkNTM0JTIyJTdE",
+            },
+          ],
         };
       },
     },
@@ -383,7 +426,12 @@ class TestManager {
           state: failingElements.length === 0,
           elements: failingElements,
           selector,
-          links: [{ label: "Loop: aria-activedescendant ", url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EYQfTD8WZd5MsT7BI_Zfu2kBwB4YpUIU4k6yr6hx2IABQw?e=cO1WlQ&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TUVENUdENkZURjNaR0xDUFdCRVAzRjdPM0omYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMmJjNmY5N2M4LTM2MTctNGI1Ni1iZjhkLTc3ZWI2Y2ZlZGVjNiUyMiU3RA%3D%3D" }],
+          links: [
+            {
+              label: "Loop: aria-activedescendant ",
+              url: "https://moysies.sharepoint.com/:fl:/g/contentstorage/CSP_de9f239b-8aef-4eff-9988-df21952d00e6/EYQfTD8WZd5MsT7BI_Zfu2kBwB4YpUIU4k6yr6hx2IABQw?e=cO1WlQ&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZTlmMjM5Yi04YWVmLTRlZmYtOTk4OC1kZjIxOTUyZDAwZTYmZD1iJTIxbXlPZjN1LUtfMDZaaU44aGxTMEE1b01EWnk0dlVqQkppVGhaZDhiM1dtU1BJUFlFaDhjalFZa3ItWkxlWUxZaCZmPTAxQUo2Ulc3TUVENUdENkZURjNaR0xDUFdCRVAzRjdPM0omYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4dGIzbHphV1Z6TG5Ob1lYSmxjRzlwYm5RdVkyOXRmR0loYlhsUFpqTjFMVXRmTURaYWFVNDRhR3hUTUVFMWIwMUVXbmswZGxWcVFrcHBWR2hhWkRoaU0xZHRVMUJKVUZsRmFEaGphbEZaYTNJdFdreGxXVXhaYUh3d01VRktObEpYTjBsTFJFRk5VVkZVVTA5U1ZrTkpWekpYTkZWUFIwTlRNalpDJTIyJTJDJTIyaSUyMiUzQSUyMmJjNmY5N2M4LTM2MTctNGI1Ni1iZjhkLTc3ZWI2Y2ZlZGVjNiUyMiU3RA%3D%3D",
+            },
+          ],
         };
       },
     },
