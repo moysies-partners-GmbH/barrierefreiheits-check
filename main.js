@@ -313,9 +313,10 @@ class TestManager {
     {
       run: () => {
         const selector = 'img:not([alt]):not([role="presentation"])';
+        const elements = document.querySelectorAll(selector);
         return {
           title: `Images should have an alt attribute or role presentation `,
-          message: `found ${document.querySelectorAll(selector).length}`,
+          message: `found ${elements.length}`,
           state: document.querySelectorAll(selector).length === 0,
           elements: document.querySelectorAll(selector),
           selector,
