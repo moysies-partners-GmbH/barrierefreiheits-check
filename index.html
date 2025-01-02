@@ -26,7 +26,8 @@
 
     const code = `
      let currentUrl = window.location.origin;
-     const isLocalhost = currentUrl.includes("127.0.0.1") || currentUrl.includes("localhost");
+    
+     const isLocalhost = currentUrl.includes("127.0.0.1:5500");
      const currenUrl = (isLocalhost ? "${local}":"${online}") + "/main.js";
      const scriptElement = document.querySelector('#${id}');
      const script = document.createElement('script');
