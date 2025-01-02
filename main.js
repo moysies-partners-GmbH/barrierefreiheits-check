@@ -25,7 +25,7 @@ class TestManager {
   eraseTest() {
     const elements = document.querySelectorAll("." + this.class);
     elements.forEach((e) => e.remove());
-    console.clear();
+    // console.clear();
   }
 
   run() {

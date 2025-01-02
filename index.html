@@ -19,21 +19,20 @@
   </body>
 
   <script>
-    const dev = false;
     const id = "mp_accessibility";
-    let currentUrl = window.location.origin;
     const local = "http://127.0.0.1:5500";
     const online =
       "https://moysies-partners-gmbh.github.io/barrierefreiheits-check";
 
-    const url = (dev ? local : online) + "/main.js";
-
     const code = `
+     let currentUrl = window.location.origin;
+     const isLocalhost = currentUrl.includes("127.0.0.1") || currentUrl.includes("localhost");
+     const currenUrl = (isLocalhost ? "${local}":"${online}") + "/main.js";
      const scriptElement = document.querySelector('#${id}');
      const script = document.createElement('script');
      script.id = '${id}';
      const usn = new Date().getTime()
-     const url = '${url}?usn='+usn
+     const url = currenUrl+'?usn='+ usn
      if(!scriptElement){
        script.onload = ()=>{
          window.runMpAccessibility()
