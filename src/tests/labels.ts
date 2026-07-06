@@ -33,7 +33,7 @@ export const inputLabelTest: Test = {
       'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
     const failingElements: Element[] = [];
     document.querySelectorAll(selector).forEach((input) => {
-      if (!document.querySelector(`label[for="${input.id}"]`)) {
+      if (!input.id || !document.querySelector(`label[for="${input.id}"]`)) {
         failingElements.push(input);
       }
     });
