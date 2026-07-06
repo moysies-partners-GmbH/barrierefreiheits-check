@@ -422,7 +422,7 @@
           const failingElements = [];
           labelElements.forEach((label) => {
             const id = label.getAttribute("for");
-            if (!id || document.querySelectorAll(`#${id}`).length !== 1) {
+            if (!id || !document.getElementById(id)) {
               failingElements.push(label);
             }
           });
@@ -444,9 +444,12 @@
       inputLabelTest = {
         run() {
           const selector = 'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
+          const labelTargets = new Set(
+            [...document.querySelectorAll("label[for]")].map((l) => l.getAttribute("for"))
+          );
           const failingElements = [];
           document.querySelectorAll(selector).forEach((input) => {
-            if (!document.querySelector(`label[for="${input.id}"]`)) {
+            if (!input.id || !labelTargets.has(input.id)) {
               failingElements.push(input);
             }
           });
@@ -480,7 +483,7 @@
           const failingElements = [];
           elements.forEach((element) => {
             const id = element.getAttribute("aria-labelledby");
-            if (!id || document.querySelectorAll(`#${id}`).length !== 1) {
+            if (!id || !document.getElementById(id)) {
               failingElements.push(element);
             }
           });
@@ -506,7 +509,7 @@
           const failingElements = [];
           elements.forEach((element) => {
             const id = element.getAttribute("aria-activedescendant");
-            if (!id || document.querySelectorAll(`#${id}`).length !== 1) {
+            if (!id || !document.getElementById(id)) {
               failingElements.push(element);
             }
           });

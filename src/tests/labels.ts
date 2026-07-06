@@ -31,9 +31,15 @@ export const inputLabelTest: Test = {
   run() {
     const selector =
       'input[type="text"],input[type="checkbox"],input[type="file"],input[type="password"],input[type="radio"],textarea';
+
+    // Build a Set of all label targets upfront — never construct a CSS selector from an ID
+    const labelTargets = new Set(
+      [...document.querySelectorAll("label[for]")].map((l) => l.getAttribute("for")),
+    );
+
     const failingElements: Element[] = [];
     document.querySelectorAll(selector).forEach((input) => {
-      if (!input.id || !document.querySelector(`label[for="${input.id}"]`)) {
+      if (!input.id || !labelTargets.has(input.id)) {
         failingElements.push(input);
       }
     });
