@@ -65,7 +65,7 @@ class TestManager {
         spread: 370,
         origin: { y: 0.2 },
       });
-      `
+      `,
     );
   }
 
@@ -259,7 +259,7 @@ class TestManager {
         const failingElements = [];
         labelElements.forEach((label) => {
           const associatedElements = document.querySelectorAll(
-            `#${label.getAttribute("for")}`
+            `#${label.getAttribute("for")}`,
           );
           if (associatedElements.length !== 1) {
             failingElements.push(label);
@@ -288,7 +288,7 @@ class TestManager {
         const failingElements = [];
         labelByElements.forEach((element) => {
           const associatedElements = document.querySelectorAll(
-            `#${element.getAttribute("aria-labelledby")}`
+            `#${element.getAttribute("aria-labelledby")}`,
           );
           if (associatedElements.length !== 1) {
             failingElements.push(element);
@@ -415,7 +415,7 @@ class TestManager {
         const failingElements = [];
         activedescendantElements.forEach((element) => {
           const associatedElements = document.querySelectorAll(
-            ${element.getAttribute("aria-activedescendant")}
+            `#${element.getAttribute("aria-activedescendant")}`,
           );
           if (associatedElements.length !== 1) {
             failingElements.push(element);

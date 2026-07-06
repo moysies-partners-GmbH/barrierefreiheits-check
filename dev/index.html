@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Design Sandbox</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #1a1a2e;
+        color: #ccc;
+        padding: 40px;
+        min-height: 100vh;
+      }
+      h1 {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      button {
+        background: #2a2a4a;
+        color: #aaa;
+        border: 1px solid #444;
+        padding: 6px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      button:hover {
+        background: #3a3a5a;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>barrierefreiheits-check — panel design sandbox</h1>
+    <div class="controls">
+      <button id="btn-errors">Show with errors</button>
+      <button id="btn-all-pass">Show all passing</button>
+      <button id="btn-toggle">Toggle panel</button>
+    </div>
+    <p style="color: #555; font-size: 13px">
+      The panel renders top-right. Edit <code>src/TestManager.ts</code> to change its design.
+    </p>
+    <script src="bundle.js"></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,14 +21,13 @@
   <script>
     const id = "mp_accessibility";
     const local = "http://127.0.0.1:5500";
-    const online =
-      "https://moysies-partners-gmbh.github.io/barrierefreiheits-check";
+    const online = "https://moysies-partners-gmbh.github.io/barrierefreiheits-check";
 
     const code = `
      let currentUrl = window.location.origin;
     
      const isLocalhost = currentUrl.includes("127.0.0.1:5500");
-     const currenUrl = (isLocalhost ? "${local}":"${online}") + "/main.js";
+     const currenUrl = (isLocalhost ? "${local}":"${online}") + "/dist/main.js";
      const scriptElement = document.querySelector('#${id}');
      const script = document.createElement('script');
      script.id = '${id}';
@@ -43,8 +42,7 @@
      }
       window.runMpAccessibility()
     `;
-    const output =
-      "javascript:" + encodeURIComponent("(function(){" + code + "})();");
+    const output = "javascript:" + encodeURIComponent("(function(){" + code + "})();");
 
     document.querySelector("#bookmarklet").href = output;
   </script>

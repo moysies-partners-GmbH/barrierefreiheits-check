@@ -1,0 +1,41 @@
+{
+  "name": "barrierefreiheits-check",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=dist/main.js --platform=browser --target=es2020",
+    "build:watch": "pnpm build --watch",
+    "dev": "esbuild dev/main.ts --bundle --outfile=dev/bundle.js --platform=browser --target=es2020 --servedir=dev --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src",
+    "format": "prettier --write src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moysies-partners-GmbH/barrierefreiheits-check.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/moysies-partners-GmbH/barrierefreiheits-check/issues"
+  },
+  "homepage": "https://github.com/moysies-partners-GmbH/barrierefreiheits-check#readme",
+  "devDependencies": {
+    "@types/web": "^0.0.352",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
+    "@vitest/coverage-v8": "^4.1.9",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.6.0",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.9.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}
