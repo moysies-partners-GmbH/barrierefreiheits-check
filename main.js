@@ -415,7 +415,7 @@ class TestManager {
         const failingElements = [];
         activedescendantElements.forEach((element) => {
           const associatedElements = document.querySelectorAll(
-            `#${element.getAttribute("aria-activedescendant")}`
+            ${element.getAttribute("aria-activedescendant")}
           );
           if (associatedElements.length !== 1) {
             failingElements.push(element);
