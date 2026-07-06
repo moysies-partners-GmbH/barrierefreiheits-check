@@ -7,7 +7,7 @@ export const labelForTest: Test = {
     const failingElements: Element[] = [];
     labelElements.forEach((label) => {
       const id = label.getAttribute("for");
-      if (!id || document.querySelectorAll(`#${id}`).length !== 1) {
+      if (!id || !document.getElementById(id)) {
         failingElements.push(label);
       }
     });

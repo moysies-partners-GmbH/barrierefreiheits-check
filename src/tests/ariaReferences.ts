@@ -7,7 +7,7 @@ export const ariaLabelledbyTest: Test = {
     const failingElements: Element[] = [];
     elements.forEach((element) => {
       const id = element.getAttribute("aria-labelledby");
-      if (!id || document.querySelectorAll(`#${id}`).length !== 1) {
+      if (!id || !document.getElementById(id)) {
         failingElements.push(element);
       }
     });
@@ -34,7 +34,7 @@ export const ariaActivedescendantTest: Test = {
     const failingElements: Element[] = [];
     elements.forEach((element) => {
       const id = element.getAttribute("aria-activedescendant");
-      if (!id || document.querySelectorAll(`#${id}`).length !== 1) {
+      if (!id || !document.getElementById(id)) {
         failingElements.push(element);
       }
     });
