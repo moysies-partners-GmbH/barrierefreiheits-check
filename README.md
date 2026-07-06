@@ -1,5 +1,7 @@
 # barrierefreiheits-check
 
+[![Deploy](https://github.com/moysies-partners-GmbH/barrierefreiheits-check/actions/workflows/static.yml/badge.svg)](https://github.com/moysies-partners-GmbH/barrierefreiheits-check/actions/workflows/static.yml)
+
 A browser bookmarklet that runs a suite of accessibility checks against any Intrexx page and displays the results in an overlay panel.
 
 Built and maintained by [moysies & partners GmbH](https://moysies.de).
